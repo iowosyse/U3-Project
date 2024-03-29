@@ -6,6 +6,8 @@ import java.util.Date;
 
 /**When running the program this will pop up and start some classes and attributes*/
 public class Seeder {
+
+    /**What's up guys it's Quandle Dingle here*/
     public static void initialize(){
         Author dante = new Author();
         Date ddate = new Date();
