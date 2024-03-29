@@ -2,6 +2,7 @@ package Controllers.Menus;
 
 import Controllers.*;
 import Project.*;
+import Repositories.TransactionRepositories;
 import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
 
@@ -21,7 +22,7 @@ public class AdminMenus {
             System.out.println("1. Access books menu.");
             System.out.println("2. Access authors menu.");
             System.out.println("3. Access users menu.");
-            System.out.println("4. Access transactions menu (lend or return).");
+            System.out.println("4. Access transactions menu.");
             System.out.println("0. Go back.");
             System.out.print(">>");
             option = sc.nextInt();
@@ -30,7 +31,7 @@ public class AdminMenus {
 
             switch (option) {
                 case 1 -> AdminMenus.adminBookMenu();
-                case 2 -> AdminMenus.adminAuthorMenu();
+                case 2 -> AdminMenus.authorMenu();
                 case 3 -> AdminMenus.userMenu(activeUser);
                 case 4 -> AdminMenus.transactionMenu();
                 case 0 -> System.out.println("Going back...");
@@ -69,7 +70,7 @@ public class AdminMenus {
     }
 
     /**Treats the author just as another profile, except this type of profile can be assigned as authors of books*/
-    public static void adminAuthorMenu() {
+    public static void authorMenu() {
         int option;
 
         do {
@@ -167,8 +168,9 @@ public class AdminMenus {
 
         do {
             System.out.println("===============================");
-            System.out.println("1. Validate token.");
-            System.out.println("2. Show transactions.");
+            System.out.println("1. Tokens.");
+            System.out.println("2. Create transaction.");
+            System.out.println("3. Show transactions.");
             System.out.println("0. Go back.");
             System.out.print(">> ");
             option = sc.nextInt();
@@ -176,18 +178,23 @@ public class AdminMenus {
             System.out.println("===============================");
 
             switch (option) {
-                case 1:
-                    TransactionController.validateToken();
-                    break;
-                case 2:
-                    TransactionController.showTransactions();
-                    break;
-                case 0:
-                    System.out.println("Going back...");
-                    break;
-                default :
-                    System.out.println("Not an option.");
-                    break;
+                case 1 -> {
+                    System.out.println("1. Validate token.");
+                    System.out.println("2. Show token history");
+                    System.out.println("0. Go back.");
+                    option = ConsoleReader.readInteger();
+
+                    switch (option) {
+                        case 1 -> TransactionController.validateToken();
+                        case 2 -> TransactionController.showTokenHistory();
+                        case 0 -> System.out.println("Going back...");
+                        default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
+                    }
+                }
+                case 2 -> TransactionController.createTransaction();
+                case 3 -> TransactionController.showTransactions();
+                case 0 -> System.out.println("Going back...");
+                default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
         } while (option != 0);
     }

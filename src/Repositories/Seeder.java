@@ -151,5 +151,7 @@ public class Seeder {
 
         BookRepositories.setAvailableBooks();
         BookRepositories.setNotAvailableBooks();
+
+        cande.createToken(it, cande, "Borrow");
     }
 }

@@ -1,8 +1,6 @@
 package Project;
 
-import Controllers.BookController;
 import Controllers.Permissions;
-import Repositories.BookRepositories;
 import Repositories.TransactionRepositories;
 import UtilityClasses.Colors;
 
@@ -68,17 +66,16 @@ public class Client extends User{
         return borrowedBooks;
     }
 
-    public void createToken(Book askingForThisBook, Client self) {
+    public void createToken(Book tokenedBook, Client self, String type) {
         Token token = new Token();
 
-        token.setTransactedBook(askingForThisBook);
+        token.setTransactedBook(tokenedBook);
         token.setDateOfTransaction(new Date());
         token.setTransactingClient(self);
-        token.typeOfTransaction = "Borrow";
+        token.typeOfTransaction = type;
         token.setTID();
 
         TransactionRepositories.tokens.add(token);
-
-        System.out.println(Colors.green + "Token created successfully!" + Colors.reset);
+        TransactionRepositories.tokenHistory.add(token);
     }
 }

@@ -2,6 +2,9 @@ package Controllers;
 
 import Project.*;
 import Repositories.*;
+import UtilityClasses.Colors;
+import UtilityClasses.ConsoleReader;
+
 import java.util.*;
 
 public class TransactionController {
@@ -173,7 +176,22 @@ public class TransactionController {
         }
     }
 
-    @Deprecated
+    public static void showTokenHistory() {
+        if (TransactionRepositories.tokenHistory.isEmpty()) {
+            System.out.println("No token has been created.");
+        } else {
+            System.out.println("-----------------------------------------------------------------------------------------------------------");
+            System.out.printf("| %-9s | %-6s | %-10s | %-20s | %-9s | %-22s | %-9s |%n", "ID", "Type", "Date", "Client name",
+                    "BookID", "Title", "Validated");
+            System.out.println("-----------------------------------------------------------------------------------------------------------");
+
+            for (Token toShow : TransactionRepositories.tokenHistory) {
+                System.out.println(toShow.dataToString());
+                System.out.println("-----------------------------------------------------------------------------------------------------------");
+            }
+        }
+    }
+
     public static void createTransaction() {
         int option, aux;
         Transaction newTransaction = new Transaction();
@@ -184,9 +202,7 @@ public class TransactionController {
         System.out.println("1. Lend a book.");
         System.out.println("2. Return a book.");
         System.out.println("0. Go back.");
-        System.out.print(">> ");
-        option = sc.nextInt();
-        sc.nextLine();
+        option = ConsoleReader.readInteger();
         System.out.println("===============================");
 
         if (option == 1) {
@@ -199,25 +215,26 @@ public class TransactionController {
             dateOfTransaction.setYear(2024);
 
             BookRepositories.showAvailableBooks();
-            System.out.println("Which book do you want to lend?");
-            System.out.print(">> ");
-            aux = sc.nextInt();
-            sc.nextLine();
+            do {
+                System.out.println("Which book do you want to lend?");
+                aux = ConsoleReader.readInteger();
+            } while (aux - 1 > BookRepositories.availableBooks.size());
 
             toLend = BookRepositories.availableBooks.get(aux - 1);
 
             ClientController.showClients(false);
-            System.out.println("To whom do you want to lend it?");
-            System.out.print(">> ");
-            aux = sc.nextInt();
-            sc.nextLine();
+            do {
+                System.out.println("To whom do you want to lend it?");
+                aux = ConsoleReader.readInteger();
+            } while (aux - 1 > UserRepositories.clients.size());
+
             transactingClient = UserRepositories.clients.get(aux - 1);
 
             if (aux - 1 > BookRepositories.availableBooks.size() || aux < 0)
                 System.out.println("That book does not exists.");
             else {
                 if (transactingClient.getNumberOfBorrowedBooks() == 3) {
-                    System.out.println("---This client must return a book before borrowing another one.---");
+                    System.out.println(Colors.yellow + "---This client must return a book before borrowing another one.---" + Colors.reset);
                 } else {
                     transactingClient.getBorrowedBooks().add(toLend);
 
@@ -229,8 +246,9 @@ public class TransactionController {
 
                     BookRepositories.notAvailableBooks.add(toLend);
                     BookRepositories.availableBooks.remove(toLend);
-                    //transactingClient.getBorrowedBooks().add(BookRepositories.addPhantomBook());
                     TransactionRepositories.transactions.add(newTransaction);
+
+                    System.out.println(Colors.green + "Book lent successfully!" + Colors.reset);
                 }
             }
         } else if (option == 2) {
@@ -244,35 +262,22 @@ public class TransactionController {
             dateOfTransaction.setYear(2024);
 
             ClientController.showClients(true);
-            System.out.println("Who wants to return a book?");
-            System.out.print(">> ");
-            aux = sc.nextInt();
-            sc.nextLine();
+            do {
+                System.out.println("Who wants to return a book?");
+                aux = ConsoleReader.readInteger();
+            } while (aux - 1 > UserRepositories.clients.size());
             transactingClient = UserRepositories.clients.get(aux - 1);
 
             if (transactingClient.getBorrowedBooks().isEmpty())
-                System.out.println("This client has no books");
+                System.out.println(Colors.yellow + "This client has no books." + Colors.reset);
             else {
-                Book template;
-                int trueIndex = 0;
-
                 transactingClient.showBorrowedBooks();
-                System.out.println("What books do they want to return?");
-                System.out.print(">> ");
-                aux = sc.nextInt();
-                sc.nextLine();
+                do {
+                    System.out.println("What book do they want to return?");
+                    aux = ConsoleReader.readInteger();
+                } while (aux - 1 > transactingClient.getBorrowedBooks().size());
 
-                template = transactingClient.getBorrowedBooks().get(aux - 1);
-
-                for (int i = aux; template.getTitle().isEmpty() && trueIndex != aux; i ++) {
-                    template = transactingClient.getBorrowedBooks().get(i - 1);
-                    if (!template.getTitle().isEmpty()) {
-                        trueIndex ++;
-                    }
-                } /*Since we need to create blank books, the right index will be hard to be found
-                so this loop serves as the 'searcher' for the actual index */
-
-                toReturn = template;
+                toReturn = transactingClient.getBorrowedBooks().get(aux - 1);
                 toReturn.isAvailable = true;
 
                 transactingClient.getBorrowedBooks().remove(toReturn);
@@ -283,12 +288,14 @@ public class TransactionController {
                 BookRepositories.availableBooks.add(toReturn);
                 BookRepositories.notAvailableBooks.remove(toReturn);
                 TransactionRepositories.transactions.add(newTransaction);
+
+                System.out.println(Colors.green + "Book returned successfully!" + Colors.reset);
             }
 
         } else if (option == 0) {
             System.out.println("Going back...");
         } else {
-            System.out.println("Not an option");
+            System.out.println(Colors.yellow + "Not an option" + Colors.reset);
         }
         System.out.println("===============================");
     }
