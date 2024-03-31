@@ -149,17 +149,19 @@ public class TransactionController {
         String verification;
 
         showTokens();
-        try {
+        do  {
             System.out.println("Which token do you want to validate?");
+            System.out.println("Enter 0 to go back.");
             System.out.print(">> ");
-            aux = sc.nextInt();
-            sc.nextLine();
+            aux = ConsoleReader.readInteger();
+        } while (aux - 1 > TransactionRepositories.tokens.size() || aux < 0);
 
+        if (aux != 0) {
             toValidate = TransactionRepositories.tokens.get(aux - 1);
 
             System.out.println(toValidate.tokenToString());
             do {
-                System.out.println("Are you sure you want to validate this token?");
+                System.out.println(Colors.yellow + "Are you sure you want to validate this token?" + Colors.reset);
                 System.out.print("Yes or no >> ");
                 verification = sc.nextLine();
             } while (!verification.equalsIgnoreCase("yes") && !verification.equalsIgnoreCase("no"));
@@ -168,12 +170,11 @@ public class TransactionController {
                 toValidate.validate();
                 TransactionRepositories.tokens.remove(toValidate);
                 TransactionRepositories.transactions.add(toValidate);
-                System.out.println("Token validated successfully!");
+                System.out.println(Colors.green + "Token validated successfully!" + Colors.reset);
             } else
                 System.out.println("Token not validated;");
-        } catch (Exception e) {
-            System.err.println("-- Invalid input --");
-        }
+        } else
+            System.out.println("Going back...");
     }
 
     public static void showTokenHistory() {
