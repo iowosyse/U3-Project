@@ -13,7 +13,8 @@ public class User {
     protected boolean inQuarantine;
 
     public User (boolean inQuarantine) {
-        setInQuarantine();
+        if (inQuarantine)
+            setInQuarantine();
     }
 
     public User(Permissions a, Permissions b, Permissions c){
