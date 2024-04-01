@@ -82,7 +82,7 @@ public class TransactionController {
                     System.out.println(toShow);
                     System.out.printf("-----------------------------------------------------------------------------------------------%n");
                 }
-            } default -> System.out.println("Not an option");
+            } default -> System.out.println(Colors.yellow + "Not an option" + Colors.reset);
         }
     }
 

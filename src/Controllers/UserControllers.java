@@ -145,7 +145,7 @@ public class UserControllers {
                             userToChange.setFreeFromQuarantine();
                     }
                     case 0 -> System.out.println("Going back...");
-                    default -> System.out.println("Not an option");
+                    default -> System.out.println(Colors.yellow + "Not an option" + Colors.reset);
                 }
             }
         } while (option != 0);

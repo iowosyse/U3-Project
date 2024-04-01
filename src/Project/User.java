@@ -1,6 +1,7 @@
 package Project;
 
 import Controllers.Permissions;
+import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
 
 public class User {
@@ -100,7 +101,7 @@ public class User {
         inQuarantine = false;
 
         System.out.println("1. Give specific permissions\n2. Restore all permissions\n0. Go back");
-        System.out.println("NOTE: GOING BACK RESTORES ALL PERMISSIONS");
+        System.out.println(Colors.yellow + "NOTE: GOING BACK RESTORES ALL PERMISSIONS" + Colors.reset);
         opt = ConsoleReader.readInteger();
 
         if (opt == 1) {

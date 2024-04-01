@@ -13,7 +13,7 @@ public class EasterEggs {
             System.out.println("Nope, there's nothing over here.");
             TitleScreen.counter++;
         } else {
-            System.out.println("Not an option");
+            System.out.println(Colors.yellow + "Not an option" + Colors.reset);
             TitleScreen.counter++;
         }
     }

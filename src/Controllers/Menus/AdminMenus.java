@@ -35,7 +35,7 @@ public class AdminMenus {
                 case 3 -> AdminMenus.userMenu(activeUser);
                 case 4 -> AdminMenus.transactionMenu();
                 case 0 -> System.out.println("Going back...");
-                default -> System.out.println("Not an option.");
+                default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
         } while (option != 0);
     }
@@ -64,7 +64,7 @@ public class AdminMenus {
                 case 3 -> BookController.updateBookData();
                 case 4 -> BookController.deleteBook();
                 case 0 -> System.out.println("Going back...");
-                default -> System.out.println("Not an option.");
+                default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
         } while (option != 0);
     }
@@ -92,7 +92,7 @@ public class AdminMenus {
                 case 3 -> AuthorController.updateAuthorData();
                 case 4 -> AuthorController.deleteAuthor();
                 case 0 -> System.out.println("Going back...");
-                default -> System.out.println("Not an option.");
+                default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
         } while (option != 0);
     }
@@ -155,7 +155,7 @@ public class AdminMenus {
                     }
                 }
                 case 0 -> System.out.println("Going back...");
-                default -> System.out.println("Not an option.");
+                default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
 
 
