@@ -159,20 +159,24 @@ public class TransactionController {
         if (aux != 0) {
             toValidate = TransactionRepositories.tokens.get(aux - 1);
 
-            System.out.println(toValidate.tokenToString());
-            do {
-                System.out.println(Colors.yellow + "Are you sure you want to validate this token?" + Colors.reset);
-                System.out.print("Yes or no >> ");
-                verification = sc.nextLine();
-            } while (!verification.equalsIgnoreCase("yes") && !verification.equalsIgnoreCase("no"));
+            if (toValidate.getTransactedBook().isAvailable) {
+                System.out.println(toValidate.tokenToString());
+                do {
+                    System.out.println(Colors.yellow + "Are you sure you want to validate this token?" + Colors.reset);
+                    System.out.print("Yes or no >> ");
+                    verification = sc.nextLine();
+                } while (!verification.equalsIgnoreCase("yes") && !verification.equalsIgnoreCase("no"));
 
-            if (verification.equalsIgnoreCase("yes")) {
-                toValidate.validate();
-                TransactionRepositories.tokens.remove(toValidate);
-                TransactionRepositories.transactions.add(toValidate);
-                System.out.println(Colors.green + "Token validated successfully!" + Colors.reset);
-            } else
-                System.out.println("Token not validated;");
+                if (verification.equalsIgnoreCase("yes")) {
+                    toValidate.validate();
+                    TransactionRepositories.tokens.remove(toValidate);
+                    TransactionRepositories.transactions.add(toValidate);
+                    System.out.println(Colors.green + "Token validated successfully!" + Colors.reset);
+                } else
+                    System.out.println("Token not validated;");
+            } else {
+                System.out.println(Colors.yellow + "This book is not available." + Colors.reset);
+            }
         } else
             System.out.println("Going back...");
     }
