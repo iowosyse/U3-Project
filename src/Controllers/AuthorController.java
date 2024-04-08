@@ -3,9 +3,7 @@ package Controllers;
 import java.util.*;
 import Project.*;
 import Repositories.*;
-import UtilityClasses.Colors;
-import UtilityClasses.ConsoleReader;
-import UtilityClasses.StuffCreator;
+import UtilityClasses.*;
 
 public class AuthorController {
     public static void createAuthor() {
