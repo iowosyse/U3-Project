@@ -2,10 +2,7 @@ package Controllers.Menus;
 
 import Controllers.UserControllers;
 import Project.*;
-import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
-
-import java.util.*;
 
 public class TitleScreen {
     public static int counter = 1;
