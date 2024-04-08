@@ -81,6 +81,10 @@ public class User {
         return permissionsString.contains("DELETE");
     }
 
+    public boolean canAsk() {
+        return permissionsString.contains("ASK");
+    }
+
     public boolean isInQuarantine() {
         return inQuarantine;
     }

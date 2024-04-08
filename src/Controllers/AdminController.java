@@ -57,7 +57,7 @@ public class AdminController {
         Admin toDelete;
 
         //Even though the super admin has all the permissions, I need to use the getter for the permissions.
-        if (theAdmin.isSuperAdmin() && theAdmin.getPermissionsString().contains("DELETE")){
+        if (theAdmin.isSuperAdmin() && theAdmin.canDelete()){
             showAdmins();
             //Makes sure it's a valid index
             do {

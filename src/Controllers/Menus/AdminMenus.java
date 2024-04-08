@@ -30,10 +30,10 @@ public class AdminMenus {
             System.out.println("===============================");
 
             switch (option) {
-                case 1 -> AdminMenus.adminBookMenu();
-                case 2 -> AdminMenus.authorMenu();
+                case 1 -> AdminMenus.adminBookMenu(activeUser);
+                case 2 -> AdminMenus.authorMenu(activeUser);
                 case 3 -> AdminMenus.userMenu(activeUser);
-                case 4 -> AdminMenus.transactionMenu();
+                case 4 -> AdminMenus.transactionMenu(activeUser);
                 case 0 -> System.out.println("Going back...");
                 default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
@@ -43,7 +43,7 @@ public class AdminMenus {
     /**
      * Shows all the options an admin has to manipulate the books
      * */
-    public static void adminBookMenu() {
+    public static void adminBookMenu(Admin activeAdmin) {
         int option;
 
         do {
@@ -59,10 +59,30 @@ public class AdminMenus {
             System.out.println("===============================");
 
             switch (option) {
-                case 1 -> BookController.createBook();
-                case 2 -> BookController.showBooks(BookController.askHowToShow());
-                case 3 -> BookController.updateBookData();
-                case 4 -> BookController.deleteBook();
+                case 1 -> {
+                    if (activeAdmin.canWrite())
+                        BookController.createBook();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 2 -> {
+                    if (activeAdmin.canRead())
+                        BookController.showBooks(BookController.askHowToShow());
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 3 -> {
+                    if (activeAdmin.canWrite() && activeAdmin.canRead())
+                        BookController.updateBookData();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 4 -> {
+                    if (activeAdmin.canDelete() && activeAdmin.canRead())
+                        BookController.deleteBook();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
                 case 0 -> System.out.println("Going back...");
                 default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
@@ -70,7 +90,7 @@ public class AdminMenus {
     }
 
     /**Treats the author just as another profile, except this type of profile can be assigned as authors of books*/
-    public static void authorMenu() {
+    public static void authorMenu(Admin activeAdmin) {
         int option;
 
         do {
@@ -87,10 +107,30 @@ public class AdminMenus {
 
             //every method has documentation, please read it if you don't know how something works
             switch (option) {
-                case 1 -> AuthorController.createAuthor();
-                case 2 -> AuthorController.showAuthors(true);
-                case 3 -> AuthorController.updateAuthorData();
-                case 4 -> AuthorController.deleteAuthor();
+                case 1 -> {
+                    if (activeAdmin.canWrite())
+                        AuthorController.createAuthor();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 2 -> {
+                    if (activeAdmin.canRead())
+                        AuthorController.showAuthors(true);
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 3 -> {
+                    if (activeAdmin.canWrite() && activeAdmin.canRead())
+                        AuthorController.updateAuthorData();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 4 -> {
+                    if (activeAdmin.canDelete() && activeAdmin.canRead())
+                        AuthorController.deleteAuthor();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
                 case 0 -> System.out.println("Going back...");
                 default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
@@ -115,44 +155,57 @@ public class AdminMenus {
 
             switch (option) {
                 case 1 -> {
-                    System.out.println("1. Create an admin.\n2. Create a client.");
-                    option = ConsoleReader.readInteger();
-                    switch (option) {
-                        case 1 -> AdminController.createAdmin();
-                        case 2 -> ClientController.createClient();
-                        default -> System.out.println(Colors.yellow + "Not an option" + Colors.reset);
-                    }
+                    if (activeAdmin.canWrite()) {
+                        System.out.println("1. Create an admin.\n2. Create a client.");
+                        option = ConsoleReader.readInteger();
+                        switch (option) {
+                            case 1 -> AdminController.createAdmin();
+                            case 2 -> ClientController.createClient();
+                            default -> System.out.println(Colors.yellow + "Not an option" + Colors.reset);
+                        }
+                    } else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
                 }
                 case 2 -> {
-                    System.out.println("1. Show admins");
-                    System.out.println("2. Show clients");
-                    System.out.println("3. Show all");
-                    System.out.print(">> ");
-                    int showOption = sc.nextInt();
-                    sc.nextLine();
+                    if (activeAdmin.canRead()) {
+                        System.out.println("1. Show admins");
+                        System.out.println("2. Show clients");
+                        System.out.println("3. Show all");
+                        System.out.print(">> ");
+                        int showOption = ConsoleReader.readInteger();
 
-                    switch (showOption) {
-                        case 1 -> AdminController.showAdmins();
-                        case 2 -> ClientController.showClients(true);
-                        case 3 -> {
-                            System.out.println("Admins: ");
-                            AdminController.showAdmins();
-                            System.out.println("Clients: ");
-                            ClientController.showClients(true);
+                        switch (showOption) {
+                            case 1 -> AdminController.showAdmins();
+                            case 2 -> ClientController.showClients(true);
+                            case 3 -> {
+                                System.out.println("Admins: ");
+                                AdminController.showAdmins();
+                                System.out.println("Clients: ");
+                                ClientController.showClients(true);
+                            }
                         }
-                    }
+                    } else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
                 }
-                case 3 -> UserControllers.updateUserData(activeAdmin);
+                case 3 -> {
+                    if (activeAdmin.canWrite() && activeAdmin.canRead())
+                        UserControllers.updateUserData(activeAdmin);
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
                 case 4 -> {
-                    System.out.println("1. Delete an admin\n2. Delete a client\n0. Go back");
-                    System.out.print(">> ");
-                    option = sc.nextInt();
-                    sc.nextLine();
+                    if (activeAdmin.canDelete() && activeAdmin.canRead()) {
+                        System.out.println("1. Delete an admin\n2. Delete a client\n0. Go back");
+                        System.out.print(">> ");
+                        option = sc.nextInt();
+                        sc.nextLine();
 
-                    switch (option) {
-                        case 1 -> AdminController.deleteAdmin(activeAdmin);
-                        case 2 -> ClientController.deleteClient();
-                    }
+                        switch (option) {
+                            case 1 -> AdminController.deleteAdmin(activeAdmin);
+                            case 2 -> ClientController.deleteClient();
+                        }
+                    } else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
                 }
                 case 0 -> System.out.println("Going back...");
                 default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
@@ -163,7 +216,7 @@ public class AdminMenus {
     }
 
     /**The program revolves around this menu and its option, can lend and return books*/
-    public static void transactionMenu() {
+    public static void transactionMenu(Admin activeAdmin) {
         int option;
 
         do {
@@ -179,20 +232,33 @@ public class AdminMenus {
 
             switch (option) {
                 case 1 -> {
-                    System.out.println("1. Validate token.");
-                    System.out.println("2. Show token history");
-                    System.out.println("0. Go back.");
-                    option = ConsoleReader.readInteger();
+                    if (activeAdmin.canWrite() && activeAdmin.canRead()) {
+                        System.out.println("1. Validate token.");
+                        System.out.println("2. Show token history");
+                        System.out.println("0. Go back.");
+                        option = ConsoleReader.readInteger();
 
-                    switch (option) {
-                        case 1 -> TransactionController.validateToken();
-                        case 2 -> TransactionController.showTokenHistory();
-                        case 0 -> System.out.println("Going back...");
-                        default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
-                    }
+                        switch (option) {
+                            case 1 -> TransactionController.validateToken();
+                            case 2 -> TransactionController.showTokenHistory();
+                            case 0 -> System.out.println("Going back...");
+                            default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
+                        }
+                    } else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
                 }
-                case 2 -> TransactionController.createTransaction();
-                case 3 -> TransactionController.showTransactions();
+                case 2 -> {
+                    if (activeAdmin.canWrite())
+                        TransactionController.createTransaction();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
+                case 3 -> {
+                    if (activeAdmin.canRead())
+                        TransactionController.showTransactions();
+                    else
+                        System.out.println(Colors.red + "You cannot perform this action." + Colors.reset);
+                }
                 case 0 -> System.out.println("Going back...");
                 default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
