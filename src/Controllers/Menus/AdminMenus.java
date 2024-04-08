@@ -11,6 +11,7 @@ import java.util.*;
 public class AdminMenus {
     public static Scanner sc = new Scanner(System.in);
 
+
     /** THE GAME */
     public static void adminMainMenu(Admin activeUser) { // first menu to show up
         int option;
