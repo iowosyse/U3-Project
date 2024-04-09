@@ -21,7 +21,7 @@ public class ClientMenus {
 
             switch (opt) {
                 case 1 -> {
-                    if (activeUser.canAsk()) {
+                    if (activeUser.canAsk() && activeUser.canRead()) {
                         System.out.println("===============================");
                         System.out.println("\t  ---Menus---");
                         System.out.println("1. Create a token to ask for a book");
