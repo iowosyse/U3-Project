@@ -173,7 +173,7 @@ public class TransactionController {
                     TransactionRepositories.transactions.add(toValidate);
                     System.out.println(Colors.green + "Token validated successfully!" + Colors.reset);
                 } else
-                    System.out.println("Token not validated;");
+                    System.out.println("Token not validated.");
             } else {
                 System.out.println(Colors.yellow + "This book is not available." + Colors.reset);
             }
