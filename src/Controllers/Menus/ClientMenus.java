@@ -34,7 +34,7 @@ public class ClientMenus {
 
                         switch (opt) {
                             case 1 -> {
-                                BookController.showBooks(3);
+                                BookController.showBooks(1);
                                 do {
                                     System.out.println("What book do you want to borrow?");
                                     System.out.println("Enter 0 to go back.");
