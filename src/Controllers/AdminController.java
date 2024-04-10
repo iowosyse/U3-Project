@@ -9,6 +9,7 @@ import UtilityClasses.*;
 public class AdminController {
     public static void createAdmin() {
         int opt;
+        String input;
 
         System.out.println("----------------------------");
         System.out.println("1. Create admin with all permissions");
@@ -86,7 +87,7 @@ public class AdminController {
         newAdmin.setProfile(StuffCreator.createProfile());
 
         System.out.println("Create a username.");
-        newAdmin.setUsername(UserRepositories.validateUsername());
+        newAdmin.setUsername(UserControllers.validateUsername());
 
         System.out.println("Create a password.");
         aux = ConsoleReader.readString();

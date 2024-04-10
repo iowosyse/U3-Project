@@ -155,4 +155,26 @@ public class UserControllers {
         theUser.setInQuarantine();
         System.out.println(Colors.green + theUser.getUsername() + " has been put to quarantine successfully!" + Colors.reset);
     }
+
+    public static String validateUsername() {
+        boolean isUnique = true;
+        String username;
+
+        do {
+            System.out.println("Enter your username.");
+            username = ConsoleReader.readString();
+
+            for (String usernameToCompare : UserRepositories.usernames) {
+                if (username.equals(usernameToCompare)) {
+                    isUnique = false;
+                    break;
+                }
+            }
+
+            if (!isUnique)
+                System.out.println(Colors.yellow + "That username is already in use." + Colors.reset);
+        } while (!isUnique);
+
+        return username;
+    }
 }

@@ -12,16 +12,12 @@ public class ClientController {
 
         Client newClient = new Client();
 
-        newClient.setProfile(StuffCreator.createProfile());
-
         ProfileRepositories.profiles.add(newClient.getProfile());
         UserRepositories.clients.add(newClient);
 
         setNewClientProfile(newClient);
-        UserRepositories.clients.add(newClient);
-        UserRepositories.users.add(newClient);
 
-        System.out.println(Colors.green + "Admin created successfully" + Colors.reset);
+        System.out.println(Colors.green + "Client created successfully" + Colors.reset);
     }
 
     /**Shows clients with or without the books they've borrowed*/
@@ -86,10 +82,13 @@ public class ClientController {
         newClientProfile.setProfile(StuffCreator.createProfile());
 
         System.out.println("Create a username.");
-        newClientProfile.setUsername(UserRepositories.validateUsername());
+        newClientProfile.setUsername(UserControllers.validateUsername());
 
         System.out.println("Create a password.");
         aux = ConsoleReader.readString();
         newClientProfile.setPassword(HashPassword.hashString(aux));
+
+        UserRepositories.clients.add(newClientProfile);
+        UserRepositories.users.add(newClientProfile);
     }
 }

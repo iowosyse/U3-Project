@@ -1,10 +1,11 @@
 package UtilityClasses;
 
+import Controllers.HashPassword;
 import Project.Profile;
+import Project.User;
 import java.util.*;
 
 public class StuffCreator {
-    static Scanner sc  = new Scanner(System.in);
     public static Profile createProfile() {
         Date dateOfBirth;
         String aux1, aux2;
