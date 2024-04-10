@@ -11,7 +11,9 @@ import java.util.*;
 public class AdminMenus {
     public static Scanner sc = new Scanner(System.in);
 
-    /** THE GAME */
+    /** THE GAME
+     * Shows everything an admin can do.
+     * @param activeUser is the one who's interacting with the program.*/
     public static void adminMainMenu(Admin activeUser) { // first menu to show up
         int option;
 
@@ -23,9 +25,7 @@ public class AdminMenus {
             System.out.println("3. Access users menu.");
             System.out.println("4. Access transactions menu.");
             System.out.println("0. Go back.");
-            System.out.print(">>");
-            option = sc.nextInt();
-            sc.nextLine();
+            option = ConsoleReader.readInteger();
             System.out.println("===============================");
 
             switch (option) {
@@ -39,9 +39,8 @@ public class AdminMenus {
         } while (option != 0);
     }
 
-    /**
-     * Shows all the options an admin has to manipulate the books
-     * */
+    /**Shows all the options an admin has to manipulate the books
+     * @param activeAdmin the one who's interacting with the program.*/
     public static void adminBookMenu(Admin activeAdmin) {
         int option;
 
@@ -52,9 +51,7 @@ public class AdminMenus {
             System.out.println("3. Update a book's data.");
             System.out.println("4. Delete a book.");
             System.out.println("0. Go back.");
-            System.out.print(">> ");
-            option = sc.nextInt();
-            sc.nextLine();
+            option = ConsoleReader.readInteger();
             System.out.println("===============================");
 
             switch (option) {
@@ -99,9 +96,7 @@ public class AdminMenus {
             System.out.println("3. Update an author's profile.");
             System.out.println("4. Delete an author.");
             System.out.println("0. Go back.");
-            System.out.print(">> ");
-            option = sc.nextInt();
-            sc.nextLine();
+            option = ConsoleReader.readInteger();
             System.out.println("===============================");
 
             //every method has documentation, please read it if you don't know how something works
@@ -147,9 +142,7 @@ public class AdminMenus {
             System.out.println("3. Update an user's data.");
             System.out.println("4. Delete an user.");
             System.out.println("0. Go back.");
-            System.out.print(">> ");
-            option = sc.nextInt();
-            sc.nextLine();
+            option = ConsoleReader.readInteger();
             System.out.println("===============================");
 
             switch (option) {
@@ -224,9 +217,7 @@ public class AdminMenus {
             System.out.println("2. Create transaction.");
             System.out.println("3. Show transactions.");
             System.out.println("0. Go back.");
-            System.out.print(">> ");
-            option = sc.nextInt();
-            sc.nextLine();
+            option = ConsoleReader.readInteger();
             System.out.println("===============================");
 
             switch (option) {

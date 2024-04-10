@@ -6,7 +6,8 @@ public class ConsoleReader {
     static Scanner sc = new Scanner(System.in);
     static String input;
 
-    /**Alternative to .nextInt() from Scanner objects. Prevents exceptions*/
+    /**Alternative to .nextInt() from Scanner objects. Prevents exceptions.
+     * @return An integer that previously was a String.*/
     public static int readInteger() {
         int result = 0;
         boolean goodToGo = false;
@@ -26,6 +27,7 @@ public class ConsoleReader {
         return result;
     }
 
+    /**@return The string the user typed*/
     public static String readString() {
         System.out.print(">> ");
         input = sc.nextLine();

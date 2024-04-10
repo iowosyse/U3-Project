@@ -17,11 +17,17 @@ public class Token extends Transaction{
 
     public void validate() {
         validated = true;
-        transactedBook.isAvailable = false;
-        BookRepositories.availableBooks.remove(transactedBook);
-        BookRepositories.notAvailableBooks.add(transactedBook);
+
+        if (typeOfTransaction.equalsIgnoreCase("Borrow")) {
+            transactedBook.isAvailable = false;
+            BookRepositories.availableBooks.remove(transactedBook);
+            BookRepositories.notAvailableBooks.add(transactedBook);
+        } else {
+            transactedBook.isAvailable = true;
+            BookRepositories.availableBooks.add(transactedBook);
+            BookRepositories.notAvailableBooks.remove(transactedBook);
+        }
         dateOfTransaction = new Date();
-        setTID();
     }
 
     public String tokenToString() {

@@ -7,23 +7,25 @@ import Repositories.BookRepositories;
 import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
 
-
 public class ClientMenus {
+    /**Shows everything the users can do.
+     * @param activeUser is the one who's interacting with the program*/
     public static void clientMainMenu(Client activeUser) {
         int opt;
 
         do {
+            System.out.println("===============================");
+            System.out.println("\t  ---Menus---");
             System.out.println("1. Create token.");
             System.out.println("2. Show all of your transactions.");
             System.out.println("0. Exit.");
-
             opt = ConsoleReader.readInteger();
+            System.out.println("===============================");
 
             switch (opt) {
                 case 1 -> {
                     if (activeUser.canAsk() && activeUser.canRead()) {
                         System.out.println("===============================");
-                        System.out.println("\t  ---Menus---");
                         System.out.println("1. Create a token to ask for a book");
                         System.out.println("2. Create a token to return a book");
                         System.out.println("0. Go back.");
@@ -63,7 +65,10 @@ public class ClientMenus {
                                     System.out.println(Colors.blue + "Wait for an admin to validate your new token. When the token gets validated " +
                                             "the transaction will appear in your transactions." + Colors.reset);
                                 }
-                            } case 0 -> System.out.println("Going back...");
+                            } case 0 -> {
+                                System.out.println("Going back...");
+                                opt = -1;
+                            }
                             default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
                         }
                     } else

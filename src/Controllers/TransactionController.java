@@ -146,7 +146,6 @@ public class TransactionController {
     public static void validateToken() {
         int aux;
         Token toValidate;
-        String verification;
 
         showTokens();
         do  {
@@ -159,26 +158,32 @@ public class TransactionController {
         if (aux != 0) {
             toValidate = TransactionRepositories.tokens.get(aux - 1);
 
-            if (toValidate.getTransactedBook().isAvailable) {
+            if (toValidate.getTransactedBook().isAvailable && toValidate.typeOfTransaction.equalsIgnoreCase("Borrow")) {
                 System.out.println(toValidate.tokenToString());
-                do {
-                    System.out.println(Colors.yellow + "Are you sure you want to validate this token?" + Colors.reset);
-                    System.out.print("Yes or no >> ");
-                    verification = sc.nextLine();
-                } while (!verification.equalsIgnoreCase("yes") && !verification.equalsIgnoreCase("no"));
-
-                if (verification.equalsIgnoreCase("yes")) {
-                    toValidate.validate();
-                    TransactionRepositories.tokens.remove(toValidate);
-                    TransactionRepositories.transactions.add(toValidate);
-                    System.out.println(Colors.green + "Token validated successfully!" + Colors.reset);
-                } else
-                    System.out.println("Token not validated.");
-            } else {
+                makeSureAndFinish(toValidate);
+            } else if(toValidate.typeOfTransaction.equalsIgnoreCase("Return")) {
+                makeSureAndFinish(toValidate);
+            } else
                 System.out.println(Colors.yellow + "This book is not available." + Colors.reset);
-            }
         } else
             System.out.println("Going back...");
+    }
+
+    public static void makeSureAndFinish(Token toValidate) {
+        String verification;
+        do {
+            System.out.println(Colors.yellow + "Are you sure you want to validate this token?" + Colors.reset);
+            System.out.print("Yes or no >> ");
+            verification = sc.nextLine();
+        } while (!verification.equalsIgnoreCase("yes") && !verification.equalsIgnoreCase("no"));
+
+        if (verification.equalsIgnoreCase("yes")) {
+            toValidate.validate();
+            TransactionRepositories.tokens.remove(toValidate);
+            TransactionRepositories.transactions.add(toValidate);
+            System.out.println(Colors.green + "Token validated successfully!" + Colors.reset);
+        } else
+            System.out.println("Token not validated.");
     }
 
     public static void showTokenHistory() {
