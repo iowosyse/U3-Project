@@ -7,7 +7,7 @@ import Repositories.*;
 import UtilityClasses.*;
 
 public class BookController {
-    /** Adds a new book to the books ArrayList */
+    /** Adds a new book to the books ArrayLis.*/
     public static void createBook() {
         String aux;
         int aux2;
@@ -15,44 +15,41 @@ public class BookController {
         Date bookDate;
         Author theAuthorOfThisBook;
 
-        for (int i = 0; i < 1; i++) {
-            AuthorController.showAuthors(false);
-            System.out.println("Who wrote this book? \n(Enter the index of the author on the list).");
-            System.out.println("Enter 0 to go back.");
-            do {
-                aux2 = ConsoleReader.readInteger();
-            } while (aux2 - 1 > AuthorRepositories.authors.size() || aux2 < 0);
+        AuthorController.showAuthors(false);
+        System.out.println("Who wrote this book? \n(Enter the index of the author on the list).");
+        System.out.println("Enter 0 to go back.");
+        do {
+            aux2 = ConsoleReader.readInteger();
+        } while (aux2 - 1 > AuthorRepositories.authors.size() || aux2 < 0);
 
-            if (aux2 != 0) {
-                theAuthorOfThisBook = AuthorRepositories.authors.get(aux2 - 1);
-                newBook.setAuthor(theAuthorOfThisBook);
+        if (aux2 != 0) {
+            theAuthorOfThisBook = AuthorRepositories.authors.get(aux2 - 1);
+            newBook.setAuthor(theAuthorOfThisBook);
 
-                Book.idCounter ++; //better and easier, no need to generate random IDs
-                newBook.setBookID();
+            Book.idCounter ++; //better and easier, no need to generate random IDs
+            newBook.setBookID();
 
-                System.out.println("What's the title of the book?");
-                aux = ConsoleReader.readString();
-                newBook.setTitle(aux);
+            System.out.println("What's the title of the book?");
+            aux = ConsoleReader.readString();
+            newBook.setTitle(aux);
 
-                System.out.println("When was it published?");
-                bookDate = StuffCreator.createDate();
-                newBook.setPublishDate(bookDate);
+            System.out.println("When was it published?");
+            bookDate = StuffCreator.createDate();
+            newBook.setPublishDate(bookDate);
 
-                System.out.println("What's the ISBN?");
-                aux = ConsoleReader.readString();
-                newBook.setISBN(aux);
+            System.out.println("What's the ISBN?");
+            aux = ConsoleReader.readString();
+            newBook.setISBN(aux);
 
-                newBook.isAvailable = true;
+            newBook.isAvailable = true;
 
-                BookRepositories.books.add(newBook);
-                BookRepositories.availableBooks.add(newBook);
-                theAuthorOfThisBook.addWrittenBook(newBook);
+            BookRepositories.books.add(newBook);
+            BookRepositories.availableBooks.add(newBook);
+            theAuthorOfThisBook.addWrittenBook(newBook);
 
-                System.out.println(Colors.green + "Book created successfully!" + Colors.reset);
-            } else {
-                System.out.println("Going back...");
-            }
-        }
+            System.out.println(Colors.green + "Book created successfully!" + Colors.reset);
+        } else
+            System.out.println("Going back...");
     }
 
     /**Gives options on how to show the books to make easier their reading*/
@@ -104,74 +101,71 @@ public class BookController {
         String auxStr;
         Author original, auxA;
 
-        for (int i = 0; i < 1; i++) {
-            showBooks(1);
-            System.out.println(Colors.blue + "----------------------------------------------------------------------------------------");
-            System.out.println("If you want to update a book that didn't show in the list it is highly possible " +
-                    "that the book is in possession of a client");
-            System.out.println("----------------------------------------------------------------------------------------" + Colors.reset);
-            do {
-                System.out.println("Which book do you want to update its data? ");
-                System.out.println("(Enter 0 to go back.)");
-                option = ConsoleReader.readInteger();
-            } while (option - 1 > BookRepositories.availableBooks.size() || option < 0);
+        showBooks(1);
+        System.out.println(Colors.blue + "----------------------------------------------------------------------------------------");
+        System.out.println("If you want to update a book that didn't show in the list it is highly possible " +
+                "that the book is in possession of a client");
+        System.out.println("----------------------------------------------------------------------------------------" + Colors.reset);
+        do {
+            System.out.println("Which book do you want to update its data? ");
+            System.out.println("(Enter 0 to go back.)");
+            option = ConsoleReader.readInteger();
+        } while (option - 1 > BookRepositories.availableBooks.size() || option < 0);
 
-            if (option != 0) {
-                Book toChange = BookRepositories.availableBooks.get(option - 1);
+        if (option != 0) {
+            Book toChange = BookRepositories.availableBooks.get(option - 1);
 
-                System.out.println("===============================");
-                System.out.println("What do you want to change?");
-                System.out.println("1. Author.");
-                System.out.println("2. Title.");
-                System.out.println("3. Publish date.");
-                System.out.println("4. ISBN.");
-                System.out.println("0. Go back.");
-                option = ConsoleReader.readInteger();
-                System.out.println("===============================");
+            System.out.println("===============================");
+            System.out.println("What do you want to change?");
+            System.out.println("1. Author.");
+            System.out.println("2. Title.");
+            System.out.println("3. Publish date.");
+            System.out.println("4. ISBN.");
+            System.out.println("0. Go back.");
+            option = ConsoleReader.readInteger();
+            System.out.println("===============================");
 
-                switch (option) {
-                    case 1 -> {
-                        AuthorController.showAuthors(false);
-                        do {
-                            System.out.println("Who's the new author?");
-                            aux = ConsoleReader.readInteger();
-                        } while (aux - 1 > AuthorRepositories.authors.size() || aux < 0);
+            switch (option) {
+                case 1 -> {
+                    AuthorController.showAuthors(false);
+                    do {
+                        System.out.println("Who's the new author?");
+                        aux = ConsoleReader.readInteger();
+                    } while (aux - 1 > AuthorRepositories.authors.size() || aux < 0);
 
-                        if (aux == 0) {
-                            System.out.println("Going back...");
-                            break;
-                        }
-
-                        original = toChange.getAuthor();
-                        auxA = AuthorRepositories.authors.get(aux);
-
-                        changeAuthor(original,auxA,toChange);
+                    if (aux == 0) {
+                        System.out.println("Going back...");
+                        break;
                     }
-                    case 2 -> {
-                        System.out.println("Enter the new title.");
-                        System.out.print(">> ");
-                        auxStr = ConsoleReader.readString();
 
-                        toChange.setTitle(auxStr);
-                    }
-                    case 3 -> {
-                        Date updatedDate = StuffCreator.createDate();
-                        toChange.setPublishDate(updatedDate);
-                    }
-                    case 4 -> {
-                        System.out.println("Enter the new ISBN.");
-                        System.out.print(">> ");
-                        auxStr = ConsoleReader.readString();
+                    original = toChange.getAuthor();
+                    auxA = AuthorRepositories.authors.get(aux);
 
-                        toChange.setISBN(auxStr);
-                    }
-                    case 0 -> System.out.println("Going back...");
-                    default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
+                    changeAuthor(original,auxA,toChange);
                 }
-            } else {
-                System.out.println("Going back...");
+                case 2 -> {
+                    System.out.println("Enter the new title.");
+                    System.out.print(">> ");
+                    auxStr = ConsoleReader.readString();
+
+                    toChange.setTitle(auxStr);
+                }
+                case 3 -> {
+                    Date updatedDate = StuffCreator.createDate();
+                    toChange.setPublishDate(updatedDate);
+                }
+                case 4 -> {
+                    System.out.println("Enter the new ISBN.");
+                    System.out.print(">> ");
+                    auxStr = ConsoleReader.readString();
+
+                    toChange.setISBN(auxStr);
+                }
+                case 0 -> System.out.println("Going back...");
+                default -> System.out.println(Colors.yellow + "Not an option." + Colors.reset);
             }
-        }
+        } else
+            System.out.println("Going back...");
     }
 
     public static void deleteBook() {

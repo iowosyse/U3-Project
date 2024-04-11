@@ -3,7 +3,7 @@ package Project;
 import Controllers.Permissions;
 
 public class Admin extends User{
-    private boolean isSuperAdmin;
+    private boolean superAdmin;
 
     public Admin(boolean inQuarantine) {
         super(inQuarantine);
@@ -33,10 +33,10 @@ public class Admin extends User{
     }
 
     public boolean isSuperAdmin() {
-        return isSuperAdmin;
+        return superAdmin;
     }
 
     public void setSuperAdmin(boolean superAdmin) {
-        isSuperAdmin = superAdmin;
+        this.superAdmin = superAdmin;
     }
 }

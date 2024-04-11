@@ -41,9 +41,7 @@ public class TitleScreen {
                     System.out.println("Yahaha! You found me!");// easter egg -2
                 default -> {
                     UtilityClasses.EasterEggs.findThem();
-                    if (counter == 20) {
-                        key = 0;
-                    }
+                    key = counter == 20 ? 0 : key;
                 }
             }
         } while (key != 0);

@@ -62,7 +62,6 @@ public class ClientController {
             } while (option - 1 > UserRepositories.clients.size() || option < 0);
 
             if (option != 0) {
-
                 toDelete1 = UserRepositories.clients.get(option - 1);
 
                 if (!toDelete1.getBorrowedBooks().isEmpty()) {

@@ -163,7 +163,6 @@ public class AdminMenus {
                         System.out.println("1. Show admins");
                         System.out.println("2. Show clients");
                         System.out.println("3. Show all");
-                        System.out.print(">> ");
                         int showOption = ConsoleReader.readInteger();
 
                         switch (showOption) {
@@ -188,9 +187,7 @@ public class AdminMenus {
                 case 4 -> {
                     if (activeAdmin.canDelete() && activeAdmin.canRead()) {
                         System.out.println("1. Delete an admin\n2. Delete a client\n0. Go back");
-                        System.out.print(">> ");
-                        option = sc.nextInt();
-                        sc.nextLine();
+                        option = ConsoleReader.readInteger();
 
                         switch (option) {
                             case 1 -> AdminController.deleteAdmin(activeAdmin);

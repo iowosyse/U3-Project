@@ -9,7 +9,6 @@ import UtilityClasses.*;
 public class AdminController {
     public static void createAdmin() {
         int opt;
-        String input;
 
         System.out.println("----------------------------");
         System.out.println("1. Create admin with all permissions");

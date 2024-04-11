@@ -4,11 +4,9 @@ import Project.*;
 import Repositories.*;
 import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
-
 import java.util.*;
 
 public class TransactionController {
-    static Scanner sc = new Scanner(System.in);
 
     /**Selects an option on deciding how to print the transactions and then shows them*/
     public static void showTransactions() {
@@ -21,9 +19,7 @@ public class TransactionController {
         System.out.println("2. By client");
         System.out.println("3. By book");
         System.out.println("4. All transactions");
-        System.out.print(">> ");
-        option = sc.nextInt();
-        sc.nextLine();
+        option = ConsoleReader.readInteger();
         System.out.println("===============================");
 
         switch (option) {
@@ -41,9 +37,7 @@ public class TransactionController {
             } case 2 -> {
                 ClientController.showClients(false);
                 System.out.println("Of whom do you want to see their transactions?");
-                System.out.print(">> ");
-                aux = sc.nextInt();
-                sc.nextLine();
+                aux = ConsoleReader.readInteger();
 
                 Client theClient = UserRepositories.clients.get(aux - 1);
 
@@ -59,8 +53,7 @@ public class TransactionController {
             } case 3 -> {
                 BookController.showBooks(3);
                 System.out.println("Of which book do you want to show its transactions?");
-                aux = sc.nextInt();
-                sc.nextLine();
+                aux = ConsoleReader.readInteger();
 
                 Book theBook = BookRepositories.books.get(aux - 1);
 
@@ -91,40 +84,34 @@ public class TransactionController {
         int aux;
 
         System.out.println("Since when do you want to show the transactions?");
-        System.out.print("\tDay >> ");
-        aux = sc.nextInt();
+        System.out.println("\tDay");
+        aux = ConsoleReader.readInteger();
         botLimit.setDate(aux);
-        sc.nextLine();
 
-        System.out.print("\tMonth(numeric) >> ");
-        aux = sc.nextInt();
-        botLimit.setMonth(aux);
-        sc.nextLine();
+        System.out.println("\tMonth (numeric)");
+        aux = ConsoleReader.readInteger();
+        botLimit.setMonth(aux - 1);
 
-        System.out.print("\tYear >> ");
-        aux = sc.nextInt();
+        System.out.print("\tYear");
+        aux = ConsoleReader.readInteger();
         botLimit.setYear(aux);
-        sc.nextLine();
 
         botLimit.setHours(00);
         botLimit.setMinutes(00);
         botLimit.setSeconds(00);
 
         System.out.println("Until when do you want to show the transactions?");
-        System.out.print("\tDay >> ");
-        aux = sc.nextInt();
+        System.out.print("\tDay");
+        aux = ConsoleReader.readInteger();
         topLimit.setDate(aux);
-        sc.nextLine();
 
-        System.out.print("\tMonth(numeric) >> ");
-        aux = sc.nextInt();
+        System.out.print("\tMonth (numeric)");
+        aux = ConsoleReader.readInteger();
         topLimit.setMonth(aux);
-        sc.nextLine();
 
-        System.out.print("\tYear >> ");
-        aux = sc.nextInt();
+        System.out.print("\tYear");
+        aux = ConsoleReader.readInteger();
         topLimit.setYear(aux);
-        sc.nextLine();
 
         topLimit.setHours(23);
         topLimit.setMinutes(59);
@@ -174,7 +161,7 @@ public class TransactionController {
         do {
             System.out.println(Colors.yellow + "Are you sure you want to validate this token?" + Colors.reset);
             System.out.print("Yes or no >> ");
-            verification = sc.nextLine();
+            verification = ConsoleReader.readString();
         } while (!verification.equalsIgnoreCase("yes") && !verification.equalsIgnoreCase("no"));
 
         if (verification.equalsIgnoreCase("yes")) {
