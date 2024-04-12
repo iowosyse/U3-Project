@@ -18,12 +18,12 @@ public class Token extends Transaction{
     public void validate() {
         validated = true;
 
-        if (typeOfTransaction.equalsIgnoreCase("Borrow")) {
-            transactedBook.isAvailable = false;
+        if (getTypeOfTransaction().equalsIgnoreCase("Borrow")) {
+            transactedBook.setAvailable(false);
             BookRepositories.availableBooks.remove(transactedBook);
             BookRepositories.notAvailableBooks.add(transactedBook);
         } else {
-            transactedBook.isAvailable = true;
+            transactedBook.setAvailable(true);
             BookRepositories.availableBooks.add(transactedBook);
             BookRepositories.notAvailableBooks.remove(transactedBook);
         }
@@ -37,7 +37,7 @@ public class Token extends Transaction{
 
     public String dataToString() {
         return String.format("| %-9s | %-6s | %-10s | %-20s | %-9s | %-22s | %-9s |", gettID(),
-                typeOfTransaction, getDateOfTransaction().getDate() + "-" +  (getDateOfTransaction().getMonth() + 1) + "-" +
+                getTypeOfTransaction(), getDateOfTransaction().getDate() + "-" +  (getDateOfTransaction().getMonth() + 1) + "-" +
                         getDateOfTransaction().getYear(), getTransactingClient().getProfile().getName() +
                         " " + getTransactingClient().getProfile().getLastName(), getTransactedBook().getBookID(),
                 getTransactedBook().getTitle(), validated);

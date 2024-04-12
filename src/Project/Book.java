@@ -6,8 +6,8 @@ public class Book {
     public static int idCounter = 6;
     private String ISBN;
     private String title;
-    public boolean isAvailable;
-    public Date publishDate;
+    private boolean available;
+    private Date publishDate;
     private String bookID = "B|";
     private Author author;
 
@@ -18,8 +18,8 @@ public class Book {
     public Book(String ISBN, String title, boolean isAvailable, Date publishDate, String bookID, Author author) {
         this.ISBN = ISBN;
         this.title = title;
-        this.isAvailable = isAvailable;
-        this.publishDate = publishDate;
+        this.setAvailable(isAvailable);
+        this.setPublishDate(publishDate);
         this.bookID = bookID;
         this.author = author;
     }
@@ -58,5 +58,17 @@ public class Book {
 
     public void setPublishDate(Date date) {
         publishDate = date;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
     }
 }

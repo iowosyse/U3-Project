@@ -4,7 +4,7 @@ import java.util.*;
 public class Transaction {
     static Random ran = new Random();
     protected String tID = "";
-    public String typeOfTransaction;
+    protected String typeOfTransaction;
     protected Date dateOfTransaction;
     protected Client transactingClient;
     protected Book transactedBook;
@@ -15,7 +15,7 @@ public class Transaction {
 
     public Transaction(String tID, String typeOfTransaction, Date dateOfTransaction, Client transactingClient, Book transactedBook) {
         this.tID = tID;
-        this.typeOfTransaction = typeOfTransaction;
+        this.setTypeOfTransaction(typeOfTransaction);
         this.dateOfTransaction = dateOfTransaction;
         this.transactingClient = transactingClient;
         this.setTransactedBook(transactedBook);
@@ -59,9 +59,17 @@ public class Transaction {
     @Override
     public String toString() {
         return String.format("| %-9s | %-6s | %-10s | %-20s | %-9s | %-22s |", gettID(),
-                typeOfTransaction, getDateOfTransaction().getDate() + "-" +  (getDateOfTransaction().getMonth() + 1) + "-" +
+                getTypeOfTransaction(), getDateOfTransaction().getDate() + "-" +  (getDateOfTransaction().getMonth() + 1) + "-" +
                         getDateOfTransaction().getYear(), getTransactingClient().getProfile().getName() +
                         " " + getTransactingClient().getProfile().getLastName(), getTransactedBook().getBookID(),
                         getTransactedBook().getTitle());
+    }
+
+    public String getTypeOfTransaction() {
+        return typeOfTransaction;
+    }
+
+    public void setTypeOfTransaction(String typeOfTransaction) {
+        this.typeOfTransaction = typeOfTransaction;
     }
 }

@@ -31,7 +31,7 @@ public class AuthorController {
             if (showBooks && thisAuthor.wroteBooks()) {
                 System.out.printf("| %-26s |%n", "Books by " + thisAuthor.getProfile().getName() +
                         " " + thisAuthor.getProfile().getLastName() + ": ");
-                for (Book bok : thisAuthor.writtenBooks) {
+                for (Book bok : thisAuthor.getWrittenBooks()) {
                     System.out.printf("| %-26s |%n", bok.getTitle());
                 }
                 System.out.println("---------------------------------------");

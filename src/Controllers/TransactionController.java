@@ -145,10 +145,10 @@ public class TransactionController {
         if (aux != 0) {
             toValidate = TransactionRepositories.tokens.get(aux - 1);
 
-            if (toValidate.getTransactedBook().isAvailable && toValidate.typeOfTransaction.equalsIgnoreCase("Borrow")) {
+            if (toValidate.getTransactedBook().isAvailable() && toValidate.getTypeOfTransaction().equalsIgnoreCase("Borrow")) {
                 System.out.println(toValidate.tokenToString());
                 makeSureAndFinish(toValidate);
-            } else if(toValidate.typeOfTransaction.equalsIgnoreCase("Return")) {
+            } else if(toValidate.getTypeOfTransaction().equalsIgnoreCase("Return")) {
                 makeSureAndFinish(toValidate);
             } else
                 System.out.println(Colors.yellow + "This book is not available." + Colors.reset);
@@ -238,8 +238,8 @@ public class TransactionController {
                     newTransaction.setTransactingClient(transactingClient);
                     newTransaction.setDateOfTransaction(dateOfTransaction);
                     newTransaction.setTransactedBook(toLend);
-                    newTransaction.typeOfTransaction = "Borrow";
-                    toLend.isAvailable = false;
+                    newTransaction.setTypeOfTransaction("Borrow");
+                    toLend.setAvailable(false);
 
                     BookRepositories.notAvailableBooks.add(toLend);
                     BookRepositories.availableBooks.remove(toLend);
@@ -252,7 +252,7 @@ public class TransactionController {
             Book toReturn;
 
             newTransaction.setTID();
-            newTransaction.typeOfTransaction = "Return";
+            newTransaction.setTypeOfTransaction("Return");
 
             System.out.println("Transaction date set to today.");
             System.out.println("------------------------------");
@@ -275,7 +275,7 @@ public class TransactionController {
                 } while (aux - 1 > transactingClient.getBorrowedBooks().size());
 
                 toReturn = transactingClient.getBorrowedBooks().get(aux - 1);
-                toReturn.isAvailable = true;
+                toReturn.setAvailable(true);
 
                 transactingClient.getBorrowedBooks().remove(toReturn);
                 newTransaction.setDateOfTransaction(dateOfTransaction);

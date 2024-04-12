@@ -5,7 +5,7 @@ import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
 
 public class User {
-    public Permissions[] permissions = new Permissions[3];
+    protected Permissions[] permissions = new Permissions[3];
     protected Profile profile;
     protected String username;
     protected String userType;
@@ -26,7 +26,7 @@ public class User {
     }
 
     public User(Permissions a) {
-        permissions[0] = Permissions.READ;
+        getPermissions()[0] = Permissions.READ;
     }
 
     public String getUsername() {
@@ -60,8 +60,8 @@ public class User {
     }
 
     protected void setPermissionsString() {
-        for (int i = 0; i < permissions.length; i++) {
-            permissionsString += permissions[i] + " ";
+        for (int i = 0; i < getPermissions().length; i++) {
+            permissionsString += getPermissions()[i] + " ";
         }
     }
 
@@ -92,8 +92,8 @@ public class User {
     public void setInQuarantine() {
         inQuarantine = true;
 
-        for (int i = 0; i < permissions.length; i++) {
-            permissions[i] = null;
+        for (int i = 0; i < getPermissions().length; i++) {
+            getPermissions()[i] = null;
         }
 
         setPermissionsString();
@@ -115,29 +115,37 @@ public class User {
             permission = permission.toUpperCase();
 
             if (permission.contains("READ"))
-                permissions[0] = Permissions.READ;
+                getPermissions()[0] = Permissions.READ;
 
             if (userType.equals("Admin")){
                 if (permission.contains("WRITE"))
-                    permissions[1] = Permissions.WRITE;
+                    getPermissions()[1] = Permissions.WRITE;
 
                 if (permission.contains("DELETE"))
-                    permissions[2] = Permissions.DELETE;
+                    getPermissions()[2] = Permissions.DELETE;
             } else {
                 if (permission.contains("ASK"))
-                    permissions[1] = Permissions.ASK;
+                    getPermissions()[1] = Permissions.ASK;
             }
         } else {
-            permissions[0] = Permissions.READ;
+            getPermissions()[0] = Permissions.READ;
 
             if (userType.equals("Admin")) {
-                permissions[1] = Permissions.WRITE;
-                permissions[2] = Permissions.DELETE;
+                getPermissions()[1] = Permissions.WRITE;
+                getPermissions()[2] = Permissions.DELETE;
             } else {
-                permissions[1] = Permissions.ASK;
+                getPermissions()[1] = Permissions.ASK;
             }
         }
 
         setPermissionsString();
+    }
+
+    public Permissions[] getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Permissions[] permissions) {
+        this.permissions = permissions;
     }
 }

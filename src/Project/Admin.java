@@ -13,15 +13,15 @@ public class Admin extends User{
 
     public Admin(Permissions a, Permissions b, Permissions c) {
         super(a);
-        permissions[1] = b;
-        permissions[2] = c;
+        getPermissions()[1] = b;
+        getPermissions()[2] = c;
         userType = "Admin";
         setPermissionsString();
     }
 
     public Admin(Permissions a, Permissions b) {
         super(a);
-        permissions[1] = b;
+        getPermissions()[1] = b;
         userType = "Admin";
         setPermissionsString();
     }

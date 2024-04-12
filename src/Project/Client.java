@@ -12,15 +12,15 @@ public class Client extends User{
         super(a);
         setProfile(name, lastName, BD);
         userType = "Client";
-        permissions[1] = Permissions.ASK;
+        getPermissions()[1] = Permissions.ASK;
         setPermissionsString();
     }
 
     public Client() {
         super();
         userType = "Client";
-        permissions[0] = Permissions.READ;
-        permissions[1] = Permissions.ASK;
+        getPermissions()[0] = Permissions.READ;
+        getPermissions()[1] = Permissions.ASK;
         setPermissionsString();
     }
 
@@ -49,8 +49,8 @@ public class Client extends User{
         for (Book showingBook : borrowedBooks) {
             if (!showingBook.getTitle().isEmpty()) {
                 System.out.printf("| %-3s | %-22s | %-20s | %-10s |%n", count, showingBook.getTitle(), showingBook.getAuthor().getProfile().getName()
-                        + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.publishDate.getMonth() + 1) + "-" +
-                        showingBook.publishDate.getYear());
+                        + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.getPublishDate().getMonth() + 1) + "-" +
+                        showingBook.getPublishDate().getYear());
                 System.out.println("-------------------------------------------------------------------");
                 count++;
             }
@@ -71,7 +71,7 @@ public class Client extends User{
         token.setTransactedBook(tokenedBook);
         token.setDateOfTransaction(new Date());
         token.setTransactingClient(self);
-        token.typeOfTransaction = type;
+        token.setTypeOfTransaction(type);
         token.setTID();
 
         TransactionRepositories.tokens.add(token);

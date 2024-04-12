@@ -11,7 +11,7 @@ public class BookRepositories {
     //Auxiliary methods
     public static void setAvailableBooks (){
         for (Book available : books) {
-            if (available.isAvailable) {
+            if (available.isAvailable()) {
                 availableBooks.add(available);
             }
         }
@@ -19,7 +19,7 @@ public class BookRepositories {
 
     public static void setNotAvailableBooks() {
         for (Book notAvailable : books) {
-            if (!notAvailable.isAvailable) {
+            if (!notAvailable.isAvailable()) {
                 notAvailableBooks.add(notAvailable);
             }
         }
@@ -31,9 +31,9 @@ public class BookRepositories {
         System.out.printf("| %-3s | %-22s | %-20s | %-10s |%n", "No.","Title", "Author", "Date");
         System.out.println("-------------------------------------------------------------------");
         for (Book showingBook : notAvailableBooks) {
-            if (!showingBook.isAvailable && !showingBook.getTitle().isEmpty()) {
+            if (!showingBook.isAvailable() && !showingBook.getTitle().isEmpty()) {
                 System.out.printf("| %-3s | %-22s | %-20s | %-10s |%n", count, showingBook.getTitle(), showingBook.getAuthor().getProfile().getName()
-                        + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.publishDate.getMonth() + 1) + "-" + showingBook.publishDate.getYear());
+                        + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.getPublishDate().getMonth() + 1) + "-" + showingBook.getPublishDate().getYear());
                 System.out.println("-------------------------------------------------------------------");
                 count ++;
             }
@@ -46,9 +46,9 @@ public class BookRepositories {
         System.out.printf("| %-3s | %-22s | %-20s | %-10s |%n", "No.","Title", "Author", "Date");
         System.out.println("-------------------------------------------------------------------");
         for (Book showingBook : availableBooks) {
-            if (showingBook.isAvailable && !showingBook.getTitle().isEmpty()) {
+            if (showingBook.isAvailable() && !showingBook.getTitle().isEmpty()) {
                 System.out.printf("| %-3s | %-22s | %-20s | %-10s |%n", count, showingBook.getTitle(), showingBook.getAuthor().getProfile().getName()
-                        + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.publishDate.getMonth() + 1) + "-" + showingBook.publishDate.getYear());
+                        + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.getPublishDate().getMonth() + 1) + "-" + showingBook.getPublishDate().getYear());
                 System.out.println("-------------------------------------------------------------------");
                 count ++;
             }

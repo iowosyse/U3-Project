@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Author {
     private Profile profile;
-    public ArrayList<Book> writtenBooks = new ArrayList<>();
+    private ArrayList<Book> writtenBooks = new ArrayList<>();
 
     public Profile getProfile()  {
         return profile;
@@ -19,14 +19,22 @@ public class Author {
     }
 
     public void addWrittenBook(Book newBook) {
-        writtenBooks.add(newBook);
+        getWrittenBooks().add(newBook);
     }
 
     public void deleteBook(Book toDelete) {
-        writtenBooks.remove(toDelete);
+        getWrittenBooks().remove(toDelete);
     }
 
     public boolean wroteBooks() {
-        return !writtenBooks.isEmpty();
+        return !getWrittenBooks().isEmpty();
+    }
+
+    public ArrayList<Book> getWrittenBooks() {
+        return writtenBooks;
+    }
+
+    public void setWrittenBooks(ArrayList<Book> writtenBooks) {
+        this.writtenBooks = writtenBooks;
     }
 }

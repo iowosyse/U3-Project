@@ -41,7 +41,7 @@ public class BookController {
             aux = ConsoleReader.readString();
             newBook.setISBN(aux);
 
-            newBook.isAvailable = true;
+            newBook.setAvailable(true);
 
             BookRepositories.books.add(newBook);
             BookRepositories.availableBooks.add(newBook);
@@ -87,7 +87,7 @@ public class BookController {
             for (Book showingBook : BookRepositories.books) {
                 if (!showingBook.getTitle().isEmpty()) {
                     System.out.printf("| %-3s | %-22s | %-20s | %-10s |%n", count, showingBook.getTitle(), showingBook.getAuthor().getProfile().getName()
-                            + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.publishDate.getMonth() + 1) + "-" + showingBook.publishDate.getYear());
+                            + " " + showingBook.getAuthor().getProfile().getLastName(), (showingBook.getPublishDate().getMonth() + 1) + "-" + showingBook.getPublishDate().getYear());
                     System.out.println("-------------------------------------------------------------------");
                     count ++;
                 }
@@ -188,7 +188,7 @@ public class BookController {
 
                 theAuthor = toDelete.getAuthor();
 
-                theAuthor.writtenBooks.remove(toDelete);
+                theAuthor.getWrittenBooks().remove(toDelete);
                 BookRepositories.books.remove(toDelete);
                 BookRepositories.availableBooks.remove(toDelete);
                 System.out.println(Colors.green + "Book deleted successfully!" + Colors.reset);

@@ -21,7 +21,7 @@ public class Seeder {
         dante.setProfile("Dante", "Alighieri", ddate);
 
         Book divineComedy = new Book("what?", "The Divine Comedy", true, dCD, "B|5", dante);
-        dante.writtenBooks.add(divineComedy);
+        dante.getWrittenBooks().add(divineComedy);
 
         Author jeffKinney = new Author();
         Date jkDate = new Date();
@@ -74,7 +74,7 @@ public class Seeder {
         itd.setMonth(8);
         itd.setYear(1986);
         Book it = new Book("978-607-310-552-1", "IT", true, itd, "B|4", stephenKing);
-        stephenKing.writtenBooks.add(it);
+        stephenKing.getWrittenBooks().add(it);
 
         BookRepositories.books.add(diaryOfAWimpyKid1);
         BookRepositories.books.add(diaryOfAWimpyKid2);
@@ -106,7 +106,7 @@ public class Seeder {
         Transaction firstTransaction = new Transaction("T|0000", "Borrow", first, cande,
                 endersGame);
         cande.getBorrowedBooks().add(endersGame);
-        endersGame.isAvailable = false;
+        endersGame.setAvailable(false);
         firstTransaction.setTransactingClient(cande);
         TransactionRepositories.transactions.add(firstTransaction);
 
@@ -128,7 +128,7 @@ public class Seeder {
 
         Transaction secondTransaction = new Transaction("T|0001", "Borrow", second, sergio, divineComedy);
         sergio.getBorrowedBooks().add(divineComedy);
-        divineComedy.isAvailable = false;
+        divineComedy.setAvailable(false);
         secondTransaction.setTransactingClient(sergio);
         TransactionRepositories.transactions.add(secondTransaction);
 
