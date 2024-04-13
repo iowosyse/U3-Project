@@ -1,6 +1,5 @@
-package Project;
+package Entities;
 
-import Controllers.Permissions;
 import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
 

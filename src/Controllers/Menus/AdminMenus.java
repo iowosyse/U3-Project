@@ -1,15 +1,11 @@
 package Controllers.Menus;
 
 import Controllers.*;
-import Project.*;
+import Entities.*;
 import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;
 
-import java.util.*;
-
-
 public class AdminMenus {
-    public static Scanner sc = new Scanner(System.in);
 
     /** THE GAME
      * Shows everything an admin can do.

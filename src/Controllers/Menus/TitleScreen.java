@@ -1,7 +1,7 @@
 package Controllers.Menus;
 
 import Controllers.UserControllers;
-import Project.*;
+import Entities.*;
 import UtilityClasses.ConsoleReader;
 
 public class TitleScreen {

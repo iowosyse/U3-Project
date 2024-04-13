@@ -1,6 +1,6 @@
 package Repositories;
 
-import Project.*;
+import Entities.*;
 import java.util.ArrayList;
 
 public class AuthorRepositories {

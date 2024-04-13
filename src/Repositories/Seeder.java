@@ -1,7 +1,7 @@
 package Repositories;
 
 import Controllers.*;
-import Project.*;
+import Entities.*;
 import java.util.Date;
 
 /**When running the program this will pop up and start some classes and attributes*/

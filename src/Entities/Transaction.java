@@ -1,4 +1,4 @@
-package Project;
+package Entities;
 
 import java.util.*;
 public class Transaction {

@@ -1,6 +1,7 @@
 package Controllers;
 
-import Project.Admin;
+import Entities.Admin;
+import Entities.Permissions;
 import Repositories.ProfileRepositories;
 import Repositories.UserRepositories;
 import UtilityClasses.*;

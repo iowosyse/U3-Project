@@ -1,8 +1,8 @@
 package Controllers.Menus;
 
 import Controllers.BookController;
-import Project.Client;
-import Project.Book;
+import Entities.Client;
+import Entities.Book;
 import Repositories.BookRepositories;
 import UtilityClasses.Colors;
 import UtilityClasses.ConsoleReader;

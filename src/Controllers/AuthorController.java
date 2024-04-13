@@ -1,7 +1,7 @@
 package Controllers;
 
 import java.util.*;
-import Project.*;
+import Entities.*;
 import Repositories.*;
 import UtilityClasses.*;
 

@@ -2,7 +2,7 @@ package Controllers;
 //Good to go.
 
 import java.util.*;
-import Project.*;
+import Entities.*;
 import Repositories.*;
 import UtilityClasses.*;
 

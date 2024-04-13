@@ -1,6 +1,5 @@
-package Project;
+package Entities;
 
-import Controllers.Permissions;
 import Repositories.TransactionRepositories;
 
 import java.util.*;

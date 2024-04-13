@@ -1,6 +1,6 @@
 package Controllers;
 
-import Project.*;
+import Entities.*;
 import Repositories.*;
 import UtilityClasses.*;
 

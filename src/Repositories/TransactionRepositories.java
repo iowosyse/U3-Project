@@ -1,7 +1,7 @@
 package Repositories;
 
-import Project.Transaction;
-import Project.Token;
+import Entities.Transaction;
+import Entities.Token;
 import java.util.ArrayList;
 
 public class TransactionRepositories {

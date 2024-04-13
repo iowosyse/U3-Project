@@ -1,8 +1,7 @@
 package UtilityClasses;
 
-import Controllers.HashPassword;
-import Project.Profile;
-import Project.User;
+import Entities.Profile;
+
 import java.util.*;
 
 public class StuffCreator {

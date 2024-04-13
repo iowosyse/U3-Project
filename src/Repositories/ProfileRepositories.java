@@ -1,6 +1,6 @@
 package Repositories;
 
-import Project.Profile;
+import Entities.Profile;
 import java.util.ArrayList;
 
 public class ProfileRepositories {

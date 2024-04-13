@@ -1,8 +1,6 @@
 package Repositories;
 
-import Project.*;
-import UtilityClasses.Colors;
-import UtilityClasses.ConsoleReader;
+import Entities.*;
 
 import java.util.ArrayList;
 

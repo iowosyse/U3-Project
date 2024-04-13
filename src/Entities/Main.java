@@ -1,4 +1,4 @@
-package Project;
+package Entities;
 
 import Controllers.Menus.TitleScreen;
 import Repositories.Seeder;

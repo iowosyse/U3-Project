@@ -1,6 +1,4 @@
-package Project;
-
-import Controllers.Permissions;
+package Entities;
 
 public class Admin extends User{
     private boolean superAdmin;

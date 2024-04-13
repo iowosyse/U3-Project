@@ -1,8 +1,8 @@
 package Controllers;
 
 import Controllers.Menus.TitleScreen;
-import Project.Admin;
-import Project.User;
+import Entities.Admin;
+import Entities.User;
 import Repositories.UserRepositories;
 import UtilityClasses.*;
 import java.util.*;

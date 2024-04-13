@@ -1,6 +1,6 @@
 package Repositories;
 
-import Project.Book;
+import Entities.Book;
 import java.util.ArrayList;
 
 public class BookRepositories {
