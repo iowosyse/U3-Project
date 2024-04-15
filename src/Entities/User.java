@@ -7,7 +7,6 @@ public class User {
     protected Permissions[] permissions = new Permissions[3];
     protected Profile profile;
     protected String username;
-    protected String userType;
     protected String permissionsString = "";
     protected boolean inQuarantine;
 
@@ -52,10 +51,6 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
-    }
-
-    public String getUserType() {
-        return userType;
     }
 
     protected void setPermissionsString() {
@@ -116,7 +111,7 @@ public class User {
             if (permission.contains("READ"))
                 getPermissions()[0] = Permissions.READ;
 
-            if (userType.equals("Admin")){
+            if (this instanceof Admin){
                 if (permission.contains("WRITE"))
                     getPermissions()[1] = Permissions.WRITE;
 
@@ -129,7 +124,7 @@ public class User {
         } else {
             getPermissions()[0] = Permissions.READ;
 
-            if (userType.equals("Admin")) {
+            if (this instanceof Admin) {
                 getPermissions()[1] = Permissions.WRITE;
                 getPermissions()[2] = Permissions.DELETE;
             } else {
@@ -146,5 +141,12 @@ public class User {
 
     public void setPermissions(Permissions[] permissions) {
         this.permissions = permissions;
+    }
+
+    public String getRole() {
+        if (this instanceof Admin)
+            return "Admin";
+        else
+            return "Client";
     }
 }

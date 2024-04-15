@@ -5,7 +5,6 @@ public class Admin extends User{
 
     public Admin(boolean inQuarantine) {
         super(inQuarantine);
-        userType = "Admin";
         setPermissionsString();
     }
 
@@ -13,20 +12,17 @@ public class Admin extends User{
         super(a);
         getPermissions()[1] = b;
         getPermissions()[2] = c;
-        userType = "Admin";
         setPermissionsString();
     }
 
     public Admin(Permissions a, Permissions b) {
         super(a);
         getPermissions()[1] = b;
-        userType = "Admin";
         setPermissionsString();
     }
 
     public Admin(Permissions a) {
         super(a);
-        userType = "Admin";
         setPermissionsString();
     }
 

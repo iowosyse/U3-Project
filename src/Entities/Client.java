@@ -10,14 +10,12 @@ public class Client extends User{
     public Client (Permissions a, String name, String lastName, Date BD) {
         super(a);
         setProfile(name, lastName, BD);
-        userType = "Client";
         getPermissions()[1] = Permissions.ASK;
         setPermissionsString();
     }
 
     public Client() {
         super();
-        userType = "Client";
         getPermissions()[0] = Permissions.READ;
         getPermissions()[1] = Permissions.ASK;
         setPermissionsString();

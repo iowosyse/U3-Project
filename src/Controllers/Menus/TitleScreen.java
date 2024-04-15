@@ -26,7 +26,7 @@ public class TitleScreen {
 
                     if (loggedIn) {
                         if (!activeUser.isInQuarantine()) {
-                            if (activeUser.getUserType().equals("Admin")){
+                            if (activeUser instanceof Admin){
                                 Admin activeAdmin = (Admin) activeUser;
                                 AdminMenus.adminMainMenu(activeAdmin);
                             } else {

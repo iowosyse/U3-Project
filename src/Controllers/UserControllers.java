@@ -2,6 +2,7 @@ package Controllers;
 
 import Controllers.Menus.TitleScreen;
 import Entities.Admin;
+import Entities.Client;
 import Entities.User;
 import Repositories.UserRepositories;
 import UtilityClasses.*;
@@ -67,7 +68,7 @@ public class UserControllers {
         for (User thisUser : UserRepositories.users) {
             System.out.printf("| %-3s | %-20s | %-6s | %-6s |%n", count, thisUser.getProfile().getName() + " " +
                     thisUser.getProfile().getLastName(), (thisUser.getProfile().getBirthDate().getMonth() + 1) + "-" +
-                    thisUser.getProfile().getBirthDate().getYear(), thisUser.getUserType());
+                    thisUser.getProfile().getBirthDate().getYear(), thisUser.getRole());
             System.out.println("------------------------------------------------");
             count ++;
         }
@@ -126,9 +127,9 @@ public class UserControllers {
                         if (userToChange.isInQuarantine())
                             System.out.println("This user is already in quarantine.");
                         else {
-                            if (userToChange.getUserType().equals("Client")) {
+                            if (userToChange instanceof Client) {
                                 putInQuarantine(userToChange);
-                            } else if (activeAdmin.isSuperAdmin() && userToChange.getUserType().equals("Admin")){
+                            } else if (activeAdmin.isSuperAdmin() && userToChange instanceof Admin){
                                 //Only admin subClass has the superAdmin attribute, so this converts User theUser to Admin.
                                 if (((Admin) userToChange).isSuperAdmin())
                                     System.out.println(Colors.yellow + "Cannot put yourself in quarantine" + Colors.reset);
